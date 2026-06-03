@@ -7,36 +7,52 @@
     <title>Registro</title>
 </head>
 	<body>
-		<div class="registro">
-			<img src="../Image/ITITools logo 2.png" alt="ITITools Logo" class="logo">
-    		<h2>Registro de Usuario</h2>
+		<main class="registro">
+			<header class="registro-header">
+				<img src="../image/logo ITI.png" alt="logo iti" class="logo">
+    			<h1>Registro de Usuario</h1>
+			</header>
 
-    		<form action="registro.php" method="post">
+    		<form action="registro.php" method="post" class="registro-form">
 
-        	<label for="nombre">Nombre:</label>
-        	<input type="text" id="nombre" name="nombre" required>
+				<div class="registro-field">
+					<label for="nombre">Nombre:</label>
+					<input type="text" id="nombre" name="nombre" required>
+				</div>
 
-        	<label for="apellido">Apellido:</label>
-        	<input type="text" id="apellido" name="apellido" required>
+				<div class="registro-field">
+					<label for="apellido">Apellido:</label>
+					<input type="text" id="apellido" name="apellido" required>
+				</div>
 
-        	<label for="email">Email:</label>
-        	<input type="email" id="email" name="email" required>
+				<div class="registro-field">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required>
+				</div>
 
-     		<label for="password">Contraseña:</label>
-      		<input type="password" id="password" name="password" required>
+				<div class="registro-field">
+					<label for="password">Contraseña:</label>
+					<input type="password" id="password" name="password" required>
+				</div>
 
-     		<label for="rol">Elige tu rol:</label>
-     		<select name="opciones" id="rol">
-            	<option value="Solicitante">Solicitante</option>
-            	<option value="Soporte">Soporte</option>
-            	<option value="Administrador">Administrador</option>
-        	</select>
+			<div class="registro-field">
+				<label for="rol">Elige tu rol:</label>
+				<select name="opciones" id="rol">
+					<option value="Solicitante">Solicitante</option>
+					<option value="Soporte">Soporte</option>
+					<option value="Administrador">Administrador</option>
+				</select>
+			</div>
 
-			<link rel="stylesheet" href="login.php">
-			<a href="login.php">¿Ya tienes una cuenta? Inicia sesión aquí</a>
-        	<button type="submit">Registrar</button>
+			<div class="registro-actions">
+				<button type="submit">Registrar</button>
+			</div>
 
-    		</form>
-		</div>
+			</form>
+
+			<footer class="registro-footer">
+				<a href="login.php">¿Ya tienes cuenta? Inicia sesión aquí</a>
+			</footer>
+		</main>
 	</body>
 </html>

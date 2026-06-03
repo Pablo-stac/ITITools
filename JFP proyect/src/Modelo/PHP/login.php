@@ -7,23 +7,30 @@
     <title>Inicio de Sesión</title>
 </head>
 	<body>
-		<div class="login">
-			<img src="../Image/ITITools logo 2.png" alt="ITITools Logo" class="logo">
-    		<h2>Inicio de Sesión</h2>
+		<main class="login">
+			<header class="login-header">
+				<img src="../image/logo ITI.png" alt="logo iti" class="logo">
+    			<h1>Inicio de Sesión</h1>
+			</header>
 
-    		<form action="login.php" method="post">
+    		<form action="login.php" method="post" class="login-form">
 
-        	<label for="email">Email:</label>
-        	<input type="email" id="email" name="email" required>
+				<div class="login-field">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required>
+				</div>
 
-     		<label for="password">Contraseña:</label>
-      		<input type="password" id="password" name="password" required>
+				<div class="login-field">
+					<label for="password">Contraseña:</label>
+					<input type="password" id="password" name="password" required>
+				</div>
 
-        	<button type="submit">Iniciar Sesión</button>
-            <link rel="stylesheet" href="registro.php">
-            <a href="registro.php">¿No tienes una cuenta? Regístrate aquí</a>
+				<div class="login-actions">
+					<button type="submit">Iniciar Sesión</button>
+					<a href="registro.php">¿No tienes una cuenta? Regístrate aquí</a>
+				</div>
 
     		</form>
-		</div>
+		</main>
 	</body>
 </html>

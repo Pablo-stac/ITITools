@@ -17,8 +17,11 @@
 <body>
     <header class="soporte-header">
         <div class="brand">
-            <h1>Portal de Soporte Técnico</h1>
-            <p>Gestión de tickets, diagnósticos, inventario y préstamos de equipos.</p>
+            <img src="../image/logo ITI.png" alt="Logo ITI" class="iti-logo">
+            <div class="brand-text">
+                <h1>Portal de Soporte Técnico</h1>
+                <p>Gestión de tickets, diagnósticos, inventario y préstamos de equipos.</p>
+            </div>
         </div>
         <nav class="soporte-nav">
             <a href="#tickets-asignados">Tickets asignados</a>
@@ -73,24 +76,34 @@
             <p>Documente el diagnóstico, cambie el estado de la incidencia y registre la solución aplicada.</p>
 
             <form action="soporte.php" method="post" class="soporte-form">
-                <label for="ticket-id">ID del ticket</label>
-                <input type="text" id="ticket-id" name="ticket_id" placeholder="Ingrese el número de ticket" required>
+                <div class="soporte-field soporte-field-compact">
+                    <label for="ticket-id">ID del ticket</label>
+                    <input type="text" id="ticket-id" name="ticket_id" placeholder="Ingrese el número de ticket" required>
+                </div>
 
-                <label for="estado-ticket">Estado</label>
-                <select id="estado-ticket" name="estado_ticket" required>
-                    <option value="">Seleccione un estado</option>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en-proceso">En proceso</option>
-                    <option value="resuelto">Resuelto</option>
-                </select>
+                <div class="soporte-field soporte-field-compact">
+                    <label for="estado-ticket">Estado</label>
+                    <select id="estado-ticket" name="estado_ticket" required>
+                        <option value="">Seleccione un estado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En proceso</option>
+                        <option value="resuelto">Resuelto</option>
+                    </select>
+                </div>
 
-                <label for="diagnostico">Diagnóstico técnico</label>
-                <textarea id="diagnostico" name="diagnostico" rows="5" placeholder="Describa el diagnóstico técnico" required></textarea>
+                <div class="soporte-field soporte-field-wide">
+                    <label for="diagnostico">Diagnóstico técnico</label>
+                    <textarea id="diagnostico" name="diagnostico" rows="5" placeholder="Describa el diagnóstico técnico" required></textarea>
+                </div>
 
-                <label for="solucion">Solución aplicada</label>
-                <textarea id="solucion" name="solucion" rows="4" placeholder="Detalle las acciones realizadas" required></textarea>
+                <div class="soporte-field soporte-field-wide">
+                    <label for="solucion">Solución aplicada</label>
+                    <textarea id="solucion" name="solucion" rows="4" placeholder="Detalle las acciones realizadas" required></textarea>
+                </div>
 
-                <button type="submit" name="actualizar_ticket">Guardar actualización</button>
+                <div class="soporte-actions">
+                    <button type="submit" name="actualizar_ticket">Guardar actualización</button>
+                </div>
             </form>
         </section>
 
@@ -99,28 +112,38 @@
             <p>Registre los movimientos de préstamo y devolución de equipos para mantener el estado actualizado.</p>
 
             <form action="soporte.php" method="post" class="soporte-form">
-                <label for="equipo-id">ID del equipo</label>
-                <input type="text" id="equipo-id" name="equipo_id" placeholder="ID o código del equipo" required>
+                <div class="soporte-field soporte-field-compact">
+                    <label for="equipo-id">ID del equipo</label>
+                    <input type="text" id="equipo-id" name="equipo_id" placeholder="ID o código del equipo" required>
+                </div>
 
-                <label for="movimiento">Movimiento</label>
-                <select id="movimiento" name="movimiento" required>
-                    <option value="">Seleccione movimiento</option>
-                    <option value="prestamo">Préstamo</option>
-                    <option value="devolucion">Devolución</option>
-                </select>
+                <div class="soporte-field soporte-field-compact">
+                    <label for="movimiento">Movimiento</label>
+                    <select id="movimiento" name="movimiento" required>
+                        <option value="">Seleccione movimiento</option>
+                        <option value="prestamo">Préstamo</option>
+                        <option value="devolucion">Devolución</option>
+                    </select>
+                </div>
 
-                <label for="condicion-equipo">Condición del equipo</label>
-                <select id="condicion-equipo" name="condicion_equipo" required>
-                    <option value="">Seleccione condición</option>
-                    <option value="funcional">Funcional</option>
-                    <option value="requiere-mantenimiento">Requiere mantenimiento</option>
-                    <option value="fuera-de-servicio">Fuera de servicio</option>
-                </select>
+                <div class="soporte-field">
+                    <label for="condicion-equipo">Condición del equipo</label>
+                    <select id="condicion-equipo" name="condicion_equipo" required>
+                        <option value="">Seleccione condición</option>
+                        <option value="funcional">Funcional</option>
+                        <option value="requiere-mantenimiento">Requiere mantenimiento</option>
+                        <option value="fuera-de-servicio">Fuera de servicio</option>
+                    </select>
+                </div>
 
-                <label for="responsable">Responsable</label>
-                <input type="text" id="responsable" name="responsable" placeholder="Nombre del responsable" required>
+                <div class="soporte-field">
+                    <label for="responsable">Responsable</label>
+                    <input type="text" id="responsable" name="responsable" placeholder="Nombre del responsable" required>
+                </div>
 
-                <button type="submit" name="registrar_movimiento">Registrar movimiento</button>
+                <div class="soporte-actions">
+                    <button type="submit" name="registrar_movimiento">Registrar movimiento</button>
+                </div>
             </form>
         </section>
 

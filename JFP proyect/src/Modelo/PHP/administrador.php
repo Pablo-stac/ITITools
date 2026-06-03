@@ -71,27 +71,37 @@
             <h2>Creación y gestión de usuarios</h2>
             <p>Registre nuevos usuarios, modifique roles y gestione el acceso al sistema.</p>
             <form action="administrador.php" method="post" class="admin-form">
-                <label for="nombre-usuario">Nombre completo</label>
-                <input type="text" id="nombre-usuario" name="nombre_usuario" placeholder="Nombre del usuario" required>
+                <div class="admin-field">
+                    <label for="nombre-usuario">Nombre completo</label>
+                    <input type="text" id="nombre-usuario" name="nombre_usuario" placeholder="Nombre del usuario" required>
+                </div>
 
-                <label for="email-usuario">Correo institucional</label>
-                <input type="email" id="email-usuario" name="email_usuario" placeholder="usuario@instituto.edu" required>
+                <div class="admin-field">
+                    <label for="email-usuario">Correo institucional</label>
+                    <input type="email" id="email-usuario" name="email_usuario" placeholder="usuario@instituto.edu" required>
+                </div>
 
-                <label for="rol-usuario">Rol</label>
-                <select id="rol-usuario" name="rol_usuario" required>
-                    <option value="">Seleccione un rol</option>
-                    <option value="solicitante">Solicitante</option>
-                    <option value="soporte">Soporte</option>
-                    <option value="administrador">Administrador</option>
-                </select>
+                <div class="admin-field admin-field-compact">
+                    <label for="rol-usuario">Rol</label>
+                    <select id="rol-usuario" name="rol_usuario" required>
+                        <option value="">Seleccione un rol</option>
+                        <option value="solicitante">Solicitante</option>
+                        <option value="soporte">Soporte</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
 
-                <label for="estado-usuario">Estado</label>
-                <select id="estado-usuario" name="estado_usuario" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
+                <div class="admin-field admin-field-compact">
+                    <label for="estado-usuario">Estado</label>
+                    <select id="estado-usuario" name="estado_usuario" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
 
-                <button type="submit" name="crear_usuario">Crear usuario</button>
+                <div class="admin-actions">
+                    <button type="submit" name="crear_usuario">Crear usuario</button>
+                </div>
             </form>
         </section>
 

@@ -1,104 +1,44 @@
 /* ================= LOGIN ================= */
 
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+/* Theme variables: ajusta colores, radios y espaciado global de login. */
+:root{
+    --bg:#f5f7fa;
+    --panel:#ffffff;
+    --text:#0b2b3a;
+    --muted:#4b5b66;
+    --accent:#0077c8;
+    --accent-strong:#005a9c;
+    --border:#d6e6f0;
+    --radius:4px;
+    --panel-gap:16px;
 }
 
-/* Fondo general (azul del logo) */
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #2f6fb0, #1b3f75);
-}
+/* Reset base y estilos globales */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial;background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;padding:20px}
 
-.logo {
-    display: block;
-    margin: 0 auto 15px;
-    width: 200px;
-}
+/* Logo y marca: zona superior de la pantalla de login */
+.logo{display:block;width:100%;max-width:100%;height:auto;margin:0 0 20px;border-radius:var(--radius);background:#053f94;object-fit:contain}
 
-.login {
-    background: linear-gradient(135deg, #3a80c1, #2a5d9f);
-    padding: 30px;
-    border-radius: 12px;
-    width: 320px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    color: white;
-}
+/* Contenedor principal de login: tarjeta centrada con sombra ligera */
+.login{width:420px;max-width:100%;background:var(--panel);border-radius:var(--radius);padding:20px;border:1px solid var(--border);box-shadow:0 6px 18px rgba(30,45,55,0.04)}
+.login h1{text-align:center;margin-bottom:20px;font-size:1.25rem;color:var(--text);font-weight:700}
+.login p.helper{text-align:center;color:var(--muted);font-size:.95rem;margin-bottom:16px}
 
-.login h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: white;
-}
+/* Campos del formulario: etiquetas, entrada de datos y enfoque */
+.login-form{display:flex;flex-direction:column;gap:14px}
+.login-field label{display:block;color:var(--muted);font-weight:600;margin-bottom:6px}
+.login-field input,.login-field select{width:100%;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text);outline:none;font-size:1rem;transition:box-shadow .14s ease,border-color .14s ease}
+.login-field input:focus,.login-field select:focus{box-shadow:0 0 0 4px rgba(0,119,200,0.08);border-color:var(--accent)}
 
-.login label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
+/* Botones principales: estilo de acción y hover */
+.login-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px}
+.login-actions button{width:100%;padding:12px 20px;border-radius:var(--radius);border:2px solid var(--accent);background:var(--accent);color:#fff;font-weight:700;cursor:pointer;font-size:0.95rem;transition:transform .12s ease,box-shadow .12s ease}
+.login-actions button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,119,200,0.12)}
 
-.login input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    margin-bottom: 15px;
-}
+/* Enlaces secundarios: ayuda y navegación adicional */
+.login-actions a{display:block;width:100%;text-align:center;color:var(--muted);text-decoration:none}
+.login-actions a:hover{text-decoration:underline}
 
-.login input:focus {
-    box-shadow: 0 0 6px rgba(245, 184, 0, 0.7);
-}
-
-
-.login button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #ffd500;
-    color: #333;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-top: 10px;
-}
-
-.login button:hover {
-    background: #e0a800;
-}
-
-/* Select */
-.login select {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    margin-bottom: 15px;
-}
-
-.login select:focus {
-    box-shadow: 0 0 6px rgba(245, 184, 0, 0.7);
-}
-
-/* Link blanco también */
-.login a {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: white;
-    text-decoration: none;
-}
-
-.login a:hover {
-    text-decoration: underline;
-}
+@media (max-width:420px){.login{padding:18px;width:100%}.logo{height:48px}}

@@ -34,34 +34,46 @@
             <p>Complete el formulario para reportar un problema técnico o un requerimiento de asistencia.</p>
 
             <form action="solicitante.php" method="post" class="solicitante-form">
-                <label for="tipo-incidencia">Tipo de incidencia</label>
-                <select id="tipo-incidencia" name="tipo_incidente" required>
-                    <option value="">Seleccione una opción</option>
-                    <option value="problema-tecnico">Problema técnico</option>
-                    <option value="hardware">Hardware</option>
-                    <option value="software">Software</option>
-                    <option value="red">Red / Conectividad</option>
-                    <option value="otro">Otro</option>
-                </select>
+                <div class="solicitante-field">
+                    <label for="tipo-incidencia">Tipo de incidencia</label>
+                    <select id="tipo-incidencia" name="tipo_incidente" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="problema-tecnico">Problema técnico</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                        <option value="red">Red / Conectividad</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
 
-                <label for="area">Área o dependencia</label>
-                <input type="text" id="area" name="area" placeholder="Departamento, unidad o laboratorio" required>
+                <div class="solicitante-field">
+                    <label for="area">Área o dependencia</label>
+                    <input type="text" id="area" name="area" placeholder="Departamento, unidad o laboratorio" required>
+                </div>
 
-                <label for="asunto-incidencia">Asunto</label>
-                <input type="text" id="asunto-incidencia" name="asunto_incidente" placeholder="Título breve de la incidencia" required>
+                <div class="solicitante-field">
+                    <label for="asunto-incidencia">Asunto</label>
+                    <input type="text" id="asunto-incidencia" name="asunto_incidente" placeholder="Título breve de la incidencia" required>
+                </div>
 
-                <label for="descripcion-incidencia">Descripción detallada</label>
-                <textarea id="descripcion-incidencia" name="descripcion_incidente" rows="6" placeholder="Describa el problema o la solicitud con la mayor información posible" required></textarea>
+                <div class="solicitante-field solicitante-field-wide">
+                    <label for="descripcion-incidencia">Descripción detallada</label>
+                    <textarea id="descripcion-incidencia" name="descripcion_incidente" rows="6" placeholder="Describa el problema o la solicitud con la mayor información posible" required></textarea>
+                </div>
 
-                <label for="prioridad-incidencia">Prioridad</label>
-                <select id="prioridad-incidencia" name="prioridad_incidente" required>
-                    <option value="">Seleccione prioridad</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                </select>
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="prioridad-incidencia">Prioridad</label>
+                    <select id="prioridad-incidencia" name="prioridad_incidente" required>
+                        <option value="">Seleccione prioridad</option>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div>
 
-                <button type="submit" name="registrar_incidencia">Enviar incidencia</button>
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_incidencia">Enviar incidencia</button>
+                </div>
             </form>
         </section>
 
@@ -70,22 +82,30 @@
             <p>Realice solicitudes de servicio para laboratorios, instalación de software o configuración de equipos.</p>
 
             <form action="solicitante.php" method="post" class="solicitante-form">
-                <label for="tipo-servicio">Tipo de servicio</label>
-                <select id="tipo-servicio" name="tipo_servicio" required>
-                    <option value="">Seleccione una opción</option>
-                    <option value="preparacion-laboratorio">Preparación de laboratorio</option>
-                    <option value="instalacion-software">Instalación de software</option>
-                    <option value="configuracion-equipo">Configuración de equipo</option>
-                    <option value="otro-servicio">Otro servicio</option>
-                </select>
+                <div class="solicitante-field">
+                    <label for="tipo-servicio">Tipo de servicio</label>
+                    <select id="tipo-servicio" name="tipo_servicio" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="preparacion-laboratorio">Preparación de laboratorio</option>
+                        <option value="instalacion-software">Instalación de software</option>
+                        <option value="configuracion-equipo">Configuración de equipo</option>
+                        <option value="otro-servicio">Otro servicio</option>
+                    </select>
+                </div>
 
-                <label for="descripcion-servicio">Descripción del servicio</label>
-                <textarea id="descripcion-servicio" name="descripcion_servicio" rows="6" placeholder="Explique la necesidad del servicio" required></textarea>
+                <div class="solicitante-field solicitante-field-wide">
+                    <label for="descripcion-servicio">Descripción del servicio</label>
+                    <textarea id="descripcion-servicio" name="descripcion_servicio" rows="6" placeholder="Explique la necesidad del servicio" required></textarea>
+                </div>
 
-                <label for="fecha-requerida">Fecha requerida</label>
-                <input type="date" id="fecha-requerida" name="fecha_requerida">
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="fecha-requerida">Fecha requerida</label>
+                    <input type="date" id="fecha-requerida" name="fecha_requerida">
+                </div>
 
-                <button type="submit" name="registrar_servicio">Enviar solicitud</button>
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_servicio">Enviar solicitud</button>
+                </div>
             </form>
         </section>
 
