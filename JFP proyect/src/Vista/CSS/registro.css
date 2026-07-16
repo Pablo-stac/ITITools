@@ -1,5 +1,11 @@
 /* ================= REGISTRO - Service Desk UI ================= */
+/* DESCRIPCIÓN: Estilos para la página de creación de nuevas cuentas
+   - Formulario de registro con 6 campos
+   - Validación de confirmación de contraseña
+   - Rol selection para determinar tipo de usuario
+   - Diseño responsive con footer centrado */
 
+/* Variables de tema y colores usados en la página de registro */
 :root {
     --color-primary: #1E4D8B;
     --color-primary-hover: #183F72;
@@ -17,6 +23,7 @@
     --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
+/* Estilos base universales para el registro */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -40,6 +47,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Tarjeta principal donde se ubica el formulario de registro */
 .registro {
     width: 100%;
     max-width: 520px;
@@ -74,12 +82,14 @@ body {
     line-height: 1.2;
 }
 
+/* FORMULARIO: Layout de grid adaptativo para campos de registro */
 .registro-form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
 }
 
+/* CAMPOS: Estilos base para inputs y labels del registro */
 .registro-field {
     display: flex;
     flex-direction: column;
@@ -114,11 +124,13 @@ body {
     box-shadow: 0 0 0 4px rgba(30, 77, 139, 0.14);
 }
 
+/* ACCIONES: Botón de envío del formulario */
 .registro-actions {
     display: flex;
     justify-content: flex-start;
 }
 
+/* Botón principal para crear cuenta */
 .registro-actions button {
     width: 100%;
     min-height: 44px;
@@ -140,10 +152,14 @@ body {
     box-shadow: 0 8px 18px rgba(30, 77, 139, 0.16);
 }
 
+/* FOOTER: Enlace al login centrado horizontalmente */
 .registro-footer {
     display: flex;
     justify-content: center;
     margin-top: 22px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .registro-footer a {
@@ -179,10 +195,6 @@ select:focus-visible {
     .registro-field:nth-child(6),
     .registro-actions {
         grid-column: 1 / -1;
-    }
-
-    .registro-actions button {
-        width: auto;
     }
 }
 

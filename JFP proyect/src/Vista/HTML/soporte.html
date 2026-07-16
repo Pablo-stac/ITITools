@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Página del soporte técnico: herramientas para gestionar tickets y movimientos de inventario -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,21 +8,28 @@
     <title>Soporte Técnico</title>
 </head>
 <body>
+    <!-- Cabecera del portal de soporte con navegación entre secciones de trabajo -->
     <header class="soporte-header">
         <div class="brand">
             <h1>Portal de Soporte Técnico</h1>
             <p>Gestión de tickets, diagnósticos, inventario y préstamos de equipos.</p>
         </div>
-        <nav class="soporte-nav">
+        <!-- Botón toggle para menú en pantallas pequeñas -->
+        <button type="button" class="nav-toggle" aria-controls="soporte-nav" aria-expanded="false">☰</button>
+        <!-- Navegación principal del portal de soporte -->
+        <nav id="soporte-nav" class="soporte-nav">
             <a href="#tickets-asignados">Tickets asignados</a>
             <a href="#actualizar-estado">Actualizar estado</a>
             <a href="#prestamos-equipos">Préstamos y devoluciones</a>
             <a href="#inventario">Inventario</a>
             <a href="#historial">Historial</a>
+            <a href="login.html" class="logout-link">Cerrar sesión</a>
         </nav>
     </header>
 
+    <!-- Contenido principal para formularios y tablas del equipo de soporte -->
     <main class="soporte-main">
+        <!-- SECCIÓN 1: Tabla de tickets asignados al técnico de soporte -->
         <section id="tickets-asignados" class="panel">
             <h2>Tickets asignados</h2>
             <p>Visualice las incidencias generadas por los solicitantes y seleccione un ticket para iniciar su atención.</p>
@@ -60,6 +68,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 2: Formulario para documentar diagnósticos y actualizar estado de tickets -->
         <section id="actualizar-estado" class="panel">
             <h2>Registrar diagnóstico y actualizar estado</h2>
             <p>Documente el diagnóstico, cambie el estado de la incidencia y registre la solución aplicada.</p>
@@ -206,5 +215,17 @@
             </div>
         </section>
     </main>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('soporte-nav');
+
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                nav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        }
+    </script>
 </body>
 </html>

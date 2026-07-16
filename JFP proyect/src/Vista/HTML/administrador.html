@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Página del panel de administrador: muestra controles y tablas para gestión interna -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,21 +8,147 @@
     <title>Administrador</title>
 </head>
 <body>
+    <!-- Cabecera principal del administrador con navegación y acceso rápido -->
     <header class="admin-header">
         <div class="brand">
             <h1>Panel del Administrador</h1>
             <p>Gestión integral del sistema, usuarios, inventario, incidencias y métricas.</p>
         </div>
-        <nav class="admin-nav">
+        <button type="button" class="nav-toggle" aria-controls="admin-nav" aria-expanded="false">☰</button>
+        <nav id="admin-nav" class="admin-nav" aria-label="Navegación del panel administrativo">
+            <a href="#tickets-asignados">Tickets asignados</a>
+            <a href="#actualizar-estado">Actualizar estado</a>
+            <a href="#prestamos-equipos">Préstamos y devoluciones</a>
+            <a href="#inventario-tecnologico">Inventario tecnológico</a>
+            <a href="#historial">Historial de intervenciones</a>
             <a href="#incidencias-globales">Incidencias globales</a>
             <a href="#gestion-usuarios">Gestión de usuarios</a>
-            <a href="#inventario-tecnologico">Inventario</a>
-            <a href="#metricas-reportes">Métricas</a>
+            <a href="#metricas-reportes">Métricas y reportes</a>
             <a href="#supervision-recursos">Supervisión</a>
+            <a href="login.html" class="logout-link">Cerrar sesión</a>
         </nav>
     </header>
 
+    <!-- Contenido principal del panel administrativo con secciones y formularios -->
     <main class="admin-main">
+
+<!-- SECCIÓN 1: Tabla de tickets asignados al técnico de soporte -->
+        <section id="tickets-asignados" class="panel">
+            <h2>Tickets asignados</h2>
+            <p>Visualice las incidencias generadas por los solicitantes y seleccione un ticket para iniciar su atención.</p>
+
+            <div class="ticket-table-wrapper">
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Solicitante</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0001</td>
+                            <td>Ana Pérez</td>
+                            <td>Instalación de software</td>
+                            <td>15/05/2026</td>
+                            <td>Alta</td>
+                            <td>Asignado</td>
+                        </tr>
+                        <tr>
+                            <td>0002</td>
+                            <td>Carlos Ruiz</td>
+                            <td>Configuración de equipo</td>
+                            <td>14/05/2026</td>
+                            <td>Media</td>
+                            <td>En proceso</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Formulario para documentar diagnósticos y actualizar estado de tickets -->
+        <section id="actualizar-estado" class="panel">
+            <h2>Registrar diagnóstico y actualizar estado</h2>
+            <p>Documente el diagnóstico, cambie el estado de la incidencia y registre la solución aplicada.</p>
+
+            <form action="administrador.html" method="post" class="soporte-form">
+                <div class="soporte-field soporte-field-compact">
+                    <label for="ticket-id">ID del ticket</label>
+                    <input type="text" id="ticket-id" name="ticket_id" placeholder="Ingrese el número de ticket" required>
+                </div>
+
+                <div class="soporte-field soporte-field-compact">
+                    <label for="estado-ticket">Estado</label>
+                    <select id="estado-ticket" name="estado_ticket" required>
+                        <option value="">Seleccione un estado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En proceso</option>
+                        <option value="resuelto">Resuelto</option>
+                    </select>
+                </div>
+
+                <div class="soporte-field soporte-field-wide">
+                    <label for="diagnostico">Diagnóstico técnico</label>
+                    <textarea id="diagnostico" name="diagnostico" rows="4" placeholder="Describa el diagnóstico técnico" required></textarea>
+                </div>
+
+                <div class="soporte-field soporte-field-wide">
+                    <label for="solucion">Solución aplicada</label>
+                    <textarea id="solucion" name="solucion" rows="4" placeholder="Detalle las acciones realizadas" required></textarea>
+                </div>
+
+                <div class="soporte-actions">
+                    <button type="submit" name="actualizar_ticket">Guardar actualización</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="prestamos-equipos" class="panel">
+            <h2>Préstamos y devoluciones de equipos</h2>
+            <p>Registre los movimientos de préstamo y devolución de equipos para mantener el estado actualizado.</p>
+
+            <form action="administrador.html" method="post" class="soporte-form">
+                <div class="soporte-field soporte-field-compact">
+                    <label for="equipo-id">ID del equipo</label>
+                    <input type="text" id="equipo-id" name="equipo_id" placeholder="ID o código del equipo" required>
+                </div>
+
+                <div class="soporte-field soporte-field-compact">
+                    <label for="movimiento">Movimiento</label>
+                    <select id="movimiento" name="movimiento" required>
+                        <option value="">Seleccione movimiento</option>
+                        <option value="prestamo">Préstamo</option>
+                        <option value="devolucion">Devolución</option>
+                    </select>
+                </div>
+
+                <div class="soporte-field">
+                    <label for="condicion-equipo">Condición del equipo</label>
+                    <select id="condicion-equipo" name="condicion_equipo" required>
+                        <option value="">Seleccione condición</option>
+                        <option value="funcional">Funcional</option>
+                        <option value="requiere-mantenimiento">Requiere mantenimiento</option>
+                        <option value="fuera-de-servicio">Fuera de servicio</option>
+                    </select>
+                </div>
+
+                <div class="soporte-field">
+                    <label for="responsable">Responsable</label>
+                    <input type="text" id="responsable" name="responsable" placeholder="Nombre del responsable" required>
+                </div>
+
+                <div class="soporte-actions">
+                    <button type="submit" name="registrar_movimiento">Registrar movimiento</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 1: Visualización de todas las incidencias y solicitudes del sistema -->
         <section id="incidencias-globales" class="panel">
             <h2>Incidencias y solicitudes</h2>
             <p>Ver todas las solicitudes y tickets del sistema, con filtros por estado y prioridad.</p>
@@ -59,6 +186,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 2: Creación de nuevas cuentas de usuario y asignación de roles -->
         <section id="gestion-usuarios" class="panel">
             <h2>Creación y gestión de usuarios</h2>
             <p>Registre nuevos usuarios, modifique roles y gestione el acceso al sistema.</p>
@@ -97,11 +225,12 @@
             </form>
         </section>
 
+        <!-- SECCIÓN 3: Monitoreo de inventario tecnológico, equipos y disponibilidad -->
         <section id="inventario-tecnologico" class="panel">
             <h2>Inventario tecnológico</h2>
             <p>Monitoree el inventario de equipos, su estado y disponibilidad para asignaciones.</p>
-            <div class="table-wrapper">
-                <table class="admin-table">
+            <div class="inventario-table-wrapper">
+                <table class="inventario-table">
                     <thead>
                         <tr>
                             <th>ID Equipo</th>
@@ -131,6 +260,41 @@
             </div>
         </section>
 
+        <section id="historial" class="panel">
+            <h2>Historial de intervenciones</h2>
+            <p>Consulte el historial de acciones realizadas sobre cada recurso e incidencia.</p>
+            <div class="historial-table-wrapper">
+                <table class="historial-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Recurso</th>
+                            <th>Intervención</th>
+                            <th>Fecha</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H-102</td>
+                            <td>Portátil E-001</td>
+                            <td>Instalación de antivirus</td>
+                            <td>12/05/2026</td>
+                            <td>Resuelto</td>
+                        </tr>
+                        <tr>
+                            <td>H-103</td>
+                            <td>Red de laboratorio</td>
+                            <td>Diagnóstico de conectividad</td>
+                            <td>14/05/2026</td>
+                            <td>En proceso</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: Dashboard de métricas, KPIs y reportes del sistema -->
         <section id="metricas-reportes" class="panel">
             <h2>Panel de métricas y reportes</h2>
             <p>Acceda a gráficos y datos clave para tomar decisiones sobre la infraestructura tecnológica.</p>
@@ -150,6 +314,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 5: Supervisión general de recursos, historial e intervenciones -->
         <section id="supervision-recursos" class="panel">
             <h2>Supervisión de recursos</h2>
             <p>Controle el estado general de los recursos y la base de conocimiento para mejoras continuas.</p>
@@ -169,5 +334,19 @@
             </div>
         </section>
     </main>
+
+    <!-- SCRIPT: Mánejo del toggle de navegación en pantallas pequeñas -->
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('admin-nav');
+
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                nav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        }
+    </script>
 </body>
 </html>

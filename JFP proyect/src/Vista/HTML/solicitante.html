@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Página del solicitante: formulario de solicitudes y tablero de seguimiento -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -7,23 +8,29 @@
     <title>Solicitante</title>
 </head>
 <body>
+    <!-- Encabezado del portal de solicitante con menú y estado del usuario -->
     <header class="solicitante-header">
         <div class="brand">
             <h1>Portal de Solicitantes</h1>
             <p>Registro y seguimiento de incidencias y solicitudes de servicio</p>
         </div>
+        <!-- Botón toggle para menú móvil -->
         <button type="button" class="nav-toggle" aria-controls="solicitante-nav" aria-expanded="false">☰</button>
+        <!-- Navegación principal con 7 opciones de acceso rápido -->
         <nav id="solicitante-nav" class="solicitante-nav">
             <a href="#registro-incidencia">Registrar incidencia</a>
+            <a href="#consulta-estado">Consultar estado</a>
             <a href="#registro-servicio">Solicitar servicio</a>
             <a href="#registro-laboratorio">Solicitar laboratorio</a>
             <a href="#registro-prestamo">Solicitar préstamo</a>
-            <a href="#consulta-estado">Consultar estado</a>
             <a href="#informacion">Información</a>
+            <a href="login.html" class="logout-link">Cerrar sesión</a>
         </nav>
     </header>
 
+    <!-- Área principal del solicitante con formularios y tablas de seguimiento -->
     <main class="solicitante-main">
+        <!-- SECCIÓN 1: Formulario para registrar incidencias técnicas -->
         <section id="registro-incidencia" class="panel">
             <h2>Registrar incidencia técnica</h2>
             <p>Complete el formulario para reportar un problema técnico o un requerimiento de asistencia.</p>
@@ -49,6 +56,29 @@
                         <option value="taller-2">Taller 2</option>
                         <option value="taller-3">Taller 3</option>
                         <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="pc-afectada">PC afectada</label>
+                    <select id="pc-afectada" name="pc_afectada" required>
+                        <option value="">Seleccione una PC</option>
+                        <option value="PC-01">PC 01</option>
+                        <option value="PC-02">PC 02</option>
+                        <option value="PC-03">PC 03</option>
+                        <option value="PC-04">PC 04</option>
+                        <option value="PC-05">PC 05</option>
+                        <option value="PC-06">PC 06</option>
+                        <option value="PC-07">PC 07</option>
+                        <option value="PC-08">PC 08</option>
+                        <option value="PC-09">PC 09</option>
+                        <option value="PC-10">PC 10</option>
+                        <option value="PC-11">PC 11</option>
+                        <option value="PC-12">PC 12</option>
+                        <option value="PC-13">PC 13</option>
+                        <option value="PC-14">PC 14</option>
+                        <option value="PC-15">PC 15</option>
+                        <option value="PC-16">PC 16</option>
                     </select>
                 </div>
 
@@ -94,29 +124,6 @@
                 </div>
 
                 <div class="solicitante-field">
-                    <label for="pc-afectada">PC afectada</label>
-                    <select id="pc-afectada" name="pc_afectada" required>
-                        <option value="">Seleccione una PC</option>
-                        <option value="PC-01">PC 01</option>
-                        <option value="PC-02">PC 02</option>
-                        <option value="PC-03">PC 03</option>
-                        <option value="PC-04">PC 04</option>
-                        <option value="PC-05">PC 05</option>
-                        <option value="PC-06">PC 06</option>
-                        <option value="PC-07">PC 07</option>
-                        <option value="PC-08">PC 08</option>
-                        <option value="PC-09">PC 09</option>
-                        <option value="PC-10">PC 10</option>
-                        <option value="PC-11">PC 11</option>
-                        <option value="PC-12">PC 12</option>
-                        <option value="PC-13">PC 13</option>
-                        <option value="PC-14">PC 14</option>
-                        <option value="PC-15">PC 15</option>
-                        <option value="PC-16">PC 16</option>
-                    </select>
-                </div>
-
-                <div class="solicitante-field">
                     <label for="tipo-incidencia">Tipo de incidencia</label>
                     <select id="tipo-incidencia" name="tipo_incidente" required>
                         <option value="">Seleccione una opción</option>
@@ -130,21 +137,15 @@
 
                 <div class="solicitante-field">
                     <label for="asunto-incidencia">Asunto</label>
-                    <input type="text"
-                           id="asunto-incidencia"
-                           name="asunto_incidente"
-                           placeholder="Título breve de la incidencia"
-                           required>
+                    <input type="text" id="asunto-incidencia" name="asunto_incidente" placeholder="Título breve de la incidencia" required>
                 </div>
 
                 <div class="solicitante-field solicitante-field-wide">
                     <label for="descripcion-incidencia">Descripción detallada</label>
-                    <textarea
-                        id="descripcion-incidencia"
+                    <textarea id="descripcion-incidencia"
                         name="descripcion_incidente"
-                        rows="6"
-                        placeholder="Describa el problema o la solicitud con la mayor información posible"
-                        required></textarea>
+                        rows="4"
+                        placeholder="Describa el problema o la solicitud con la mayor información de ser posible" required></textarea>
                 </div>
 
                 <div class="solicitante-actions">
@@ -155,6 +156,42 @@
 
             </form>
         </section>
+
+        <section id="consulta-estado" class="panel">
+            <h2>Consultar estado de solicitudes</h2>
+            <p>Verifique el estado de sus incidencias y solicitudes registradas.</p>
+
+            <div class="estado-summary">
+                <table class="estado-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                            <td>15/05/2026</td>
+                            <td>Incidencia</td>
+                            <td>No enciende equipo</td>
+                            <td>Pendiente</td>
+                            <td>Asignado a soporte</td>
+                        </tr>
+                        <tr>
+                            <td>10/05/2026</td>
+                            <td>Servicio</td>
+                            <td>Instalación de software</td>
+                            <td>En proceso</td>
+                            <td>Programado para mañana</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <section id="registro-servicio" class="panel">
             <h2>Solicitar servicio</h2>
             <p>Realice solicitudes de servicio para instalación de software o configuración de equipos.</p>
@@ -172,7 +209,7 @@
 
                 <div class="solicitante-field solicitante-field-wide">
                     <label for="descripcion-servicio">Descripción del servicio</label>
-                    <textarea id="descripcion-servicio" name="descripcion_servicio" rows="6" placeholder="Explique la necesidad del servicio" required></textarea>
+                    <textarea id="descripcion-servicio" name="descripcion_servicio" rows="4" placeholder="Explique la necesidad del servicio" required></textarea>
                 </div>
 
                 <div class="solicitante-actions">
@@ -246,41 +283,6 @@
             </form>
         </section>
 
-        <section id="consulta-estado" class="panel">
-            <h2>Consultar estado de solicitudes</h2>
-            <p>Verifique el estado de sus incidencias y solicitudes registradas.</p>
-
-            <div class="estado-summary">
-                <table class="estado-table">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Tipo</th>
-                            <th>Asunto</th>
-                            <th>Estado</th>
-                            <th>Observaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                            <td>15/05/2026</td>
-                            <td>Incidencia</td>
-                            <td>No enciende equipo</td>
-                            <td>Pendiente</td>
-                            <td>Asignado a soporte</td>
-                        </tr>
-                        <tr>
-                            <td>10/05/2026</td>
-                            <td>Servicio</td>
-                            <td>Instalación de software</td>
-                            <td>En proceso</td>
-                            <td>Programado para mañana</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
         <section id="informacion" class="panel">
             <h2>Bienvenido, solicitante</h2>
             <p>Acceso seguro y autenticado. Desde aquí puede revisar todas sus solicitudes, crear nuevos tickets y conocer el seguimiento de su atención.</p>
@@ -313,5 +315,7 @@
             });
         }
     </script>
+    <script src="../JS/fecha.js" defer></script>
+    <script src="../JS/hora.js" defer></script>
 </body>
 </html>

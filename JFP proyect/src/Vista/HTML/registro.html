@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Página de registro: permite crear un nuevo usuario con rol y validación de contraseña -->
 <html lang="es">	
 <head>
 	<meta charset="UTF-8">
@@ -7,12 +8,14 @@
     <title>Registro</title>
 </head>
 	<body>
+		<!-- Contenedor principal de la página de registro -->
 		<main class="registro">
 			<header class="registro-header">
 				<img src="../IMG/logo ITI.png" alt="logo iti" class="logo">
     			<h1>Registro de Usuario</h1>
 			</header>
 
+    		<!-- Formulario de registro con campos para nombre, email, contraseña y rol -->
     		<form action="registro.html" method="post" class="registro-form">
 
 				<div class="registro-field">
@@ -42,23 +45,21 @@
 
 			<div class="registro-field">
 				<label for="rol">Elige tu rol:</label>
-				<select name="opciones" id="rol">
-					<option value="Solicitante">Solicitante</option>
-					<option value="Soporte">Soporte</option>
-					<option value="Administrador">Administrador</option>
-				</select>
-			</div>
+			<select name="rol" id="rol">
+				<option value="solicitante">Solicitante</option>
+				<option value="soporte">Soporte</option>
+			</select>
+		</div>
 
-			<div class="registro-actions">
-				<button type="submit">Registrar</button>
-			</div>
+		<div class="registro-actions">
+			<button type="submit">Registrar</button>
+		</div>
+		</form>
 
-			</form>
-
-			<footer class="registro-footer">
+		<footer class="registro-footer">
 				<a href="login.html">¿Ya tienes cuenta? Inicia sesión aquí</a>
 			</footer>
 		</main>
-		<script src="../JS/password.js"></script>
+		<script src="../JS/password.js" defer></script>
 	</body>
 </html>

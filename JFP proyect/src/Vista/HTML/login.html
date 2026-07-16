@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Página de inicio de sesión: controla el proceso de autenticación y la navegación hacia registro -->
 <html lang="es">	
 <head>
 	<meta charset="UTF-8">
@@ -7,13 +8,15 @@
     <title>Inicio de Sesión</title>
 </head>
 	<body>
+		<!-- Contenedor principal de la pantalla de login -->
 		<main class="login">
 			<header class="login-header">
 				<img src="../IMG/logo ITI.png" alt="logo iti" class="logo">
     			<h1>Inicio de Sesión</h1>
 			</header>
 
-    		<form action="login.html" method="post" class="login-form">
+    		<!-- Formulario de login que se gestiona desde login.js -->
+    		<form action="#" method="post" class="login-form">
 
 				<div class="login-field">
 					<label for="email">Email:</label>
@@ -32,5 +35,6 @@
 
     		</form>
 		</main>
-	</body>
+        <script src="../JS/login.js" defer></script>
+    </body>
 </html>
