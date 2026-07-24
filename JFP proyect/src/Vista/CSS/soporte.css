@@ -66,7 +66,11 @@ svg {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    background: var(--color-white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -119,6 +123,10 @@ svg {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 8px;
+    position: sticky;
+    top: 88px;
+    z-index: 999;
+    background: var(--color-bg);
 }
 
 .soporte-nav.open {
@@ -334,6 +342,47 @@ select:focus-visible,
 textarea:focus-visible {
     outline: 3px solid rgba(30, 77, 139, 0.18);
     outline-offset: 2px;
+}
+
+@media (max-width: 585px) {
+    .soporte-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 12px;
+    }
+
+    .brand {
+        min-width: 0;
+        grid-column: 1;
+    }
+
+    .brand h1 {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .brand p {
+        display: none;
+    }
+
+    .nav-toggle {
+        grid-column: 2;
+        justify-self: end;
+        flex-shrink: 0;
+    }
+
+    .soporte-nav {
+        grid-column: 1 / -1;
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        top: auto;
+        background: transparent;
+    }
 }
 
 @media (max-width: 767px) {
