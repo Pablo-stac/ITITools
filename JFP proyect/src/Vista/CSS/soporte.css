@@ -336,272 +336,6 @@ textarea:focus-visible {
     outline-offset: 2px;
 }
 
-/* RESPONSIVE: Ajustes para tablets (mín 576px) */
-@media (min-width: 576px) {
-    .soporte-actions button {
-        width: auto;
-    }
-}
-
-/* RESPONSIVE: Ajustes para escritorio (mín 768px) - Menú horizontal, formularios más amplios */
-@media (min-width: 768px) {
-    /* Encabezado con estilos mejorados en desktop */
-    .soporte-header {
-        padding: 24px;
-        border: 1px solid var(--color-border);
-        border-top: 0;
-        border-radius: 0 0 var(--radius-md) var(--radius-md);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .nav-toggle {
-        display: none;
-    }
-
-    .soporte-nav {
-        width: auto;
-        display: flex !important;
-        flex-direction: row;
-        justify-content: flex-end;
-        gap: 10px;
-    }
-
-    .soporte-main {
-        padding: 28px 24px 56px;
-    }
-
-    .panel {
-        margin-bottom: 24px;
-        padding: 28px;
-        box-shadow: var(--shadow-md);
-    }
-
-    .soporte-form {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px 20px;
-    }
-
-    .soporte-field-wide,
-    .soporte-actions {
-        grid-column: 1 / -1;
-    }
-}
-
-/* ================= Dashboard layout ================= */
-@media (min-width: 768px) {
-    body {
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    body::before {
-        content: "Buscar   |   Notificaciones   |   Acciones rapidas";
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 240px;
-        z-index: 20;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 0 24px;
-        background: var(--color-white);
-        border-bottom: 1px solid var(--color-border);
-        color: var(--color-muted);
-        font-size: 0.92rem;
-        font-weight: 600;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .soporte-header {
-        position: fixed;
-        inset: 0 auto 0 0;
-        z-index: 30;
-        width: 240px;
-        height: 100vh;
-        max-width: none;
-        padding: 24px 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 24px;
-        overflow-y: auto;
-        border-top: 0;
-        border-left: 0;
-        border-bottom: 0;
-        border-radius: 0;
-        min-height: 0;
-    }
-
-    .brand {
-        align-items: flex-start;
-        flex-shrink: 0;
-        padding-bottom: 18px;
-        border-bottom: 1px solid var(--color-border);
-    }
-
-    .soporte-nav {
-        width: 100%;
-        display: flex;
-        flex: 1 1 auto;
-        min-height: 0;
-        flex-direction: column;
-        gap: 10px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .brand::after {
-        content: "Usuario activo";
-        display: inline-flex;
-        width: fit-content;
-        margin-top: 12px;
-        padding: 7px 10px;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-sm);
-        background: var(--color-bg-soft);
-        color: var(--color-muted);
-        font-size: 0.82rem;
-        font-weight: 700;
-    }
-
-    .brand h1 {
-        font-size: 1.12rem;
-    }
-
-    .brand p {
-        font-size: 0.86rem;
-    }
-
-    .soporte-nav {
-        width: 100%;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .soporte-nav a {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    .soporte-nav .logout-link {
-        margin-top: auto;
-    }
-
-    .soporte-main {
-        width: calc(100% - 240px);
-        max-width: none;
-        margin-left: 240px;
-        min-width: 0;
-        padding: 94px 24px 48px;
-        display: grid;
-        gap: 24px;
-        overflow-x: hidden;
-    }
-
-    .soporte-main::before {
-        content: "Dashboard de Soporte";
-        min-height: 190px;
-        display: flex;
-        align-items: flex-end;
-        padding: 28px;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background-image:
-            linear-gradient(90deg, rgba(30, 77, 139, 0.88), rgba(30, 77, 139, 0.48)),
-            url("../IMG/utu entrada.jpg"),
-            url("../IMG/salon.jpg");
-        background-size: 100% 100%, 50% 100%, 50% 100%;
-        background-position: center, left center, right center;
-        background-repeat: no-repeat;
-        box-shadow: var(--shadow-md);
-        color: var(--color-white);
-        font-size: clamp(1.6rem, 3vw, 2.6rem);
-        font-weight: 800;
-        line-height: 1.1;
-    }
-
-    .panel {
-        margin-bottom: 0;
-        min-width: 0;
-        overflow: hidden;
-    }
-
-    .ticket-table-wrapper,
-    .inventario-table-wrapper,
-    .historial-table-wrapper {
-        max-width: 100%;
-        min-width: 0;
-        overflow-x: auto;
-    }
-
-    .ticket-table,
-    .inventario-table,
-    .historial-table {
-        min-width: 620px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-    body::before {
-        left: 88px;
-        justify-content: center;
-        padding: 0 16px;
-        font-size: 0.84rem;
-    }
-
-    .soporte-header {
-        width: 88px;
-        padding: 18px 10px;
-    }
-
-    .brand {
-        align-items: center;
-        text-align: center;
-    }
-
-    .brand h1,
-    .brand p,
-    .brand::after {
-        display: none;
-    }
-
-    .brand::before {
-        content: "SOP";
-        display: grid;
-        place-items: center;
-        width: 48px;
-        height: 48px;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background: var(--color-bg-soft);
-        color: var(--color-primary);
-        font-weight: 800;
-    }
-
-    .soporte-nav a {
-        min-height: 46px;
-        padding: 8px;
-        justify-content: center;
-        font-size: 0;
-    }
-
-    .soporte-nav a::first-letter {
-        font-size: 0.9rem;
-    }
-
-    .soporte-main {
-        width: calc(100% - 88px);
-        margin-left: 88px;
-        padding-right: 18px;
-        padding-left: 18px;
-    }
-}
-
 @media (max-width: 767px) {
     body {
         overflow-x: hidden;
@@ -620,26 +354,47 @@ textarea:focus-visible {
         overflow-y: auto;
     }
 
-    .soporte-main::before {
-        content: "Dashboard de Soporte";
-        display: block;
-        min-height: 150px;
-        padding: 20px;
-        margin-bottom: 18px;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background-image:
-            linear-gradient(90deg, rgba(30, 77, 139, 0.88), rgba(30, 77, 139, 0.5)),
-            url("../IMG/utu entrada.jpg"),
-            url("../IMG/salon.jpg");
-        background-size: 100% 100%, 50% 100%, 50% 100%;
-        background-position: center, left center, right center;
-        background-repeat: no-repeat;
-        box-shadow: var(--shadow-sm);
-        color: var(--color-white);
-        font-size: 1.55rem;
-        font-weight: 800;
-        line-height: 1.1;
+}
+
+.soporte-main::before {
+    content: "Dashboard de Soporte";
+    display: block;
+    min-height: 150px;
+    padding: 20px;
+    margin-bottom: 18px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-image:
+        linear-gradient(90deg, rgba(30, 77, 139, 0.88), rgba(30, 77, 139, 0.5)),
+        url("../IMG/utu entrada.jpg"),
+        url("../IMG/pasillo.jpg"),
+        url("../IMG/salon.jpg");
+    background-size: 100% 100%, 33% 100%, 33% 100%, 33% 100%;
+    background-position: center, left center, center center, right center;
+    background-repeat: no-repeat;
+    box-shadow: var(--shadow-sm);
+    color: var(--color-white);
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+@media (max-width: 767px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .soporte-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .soporte-nav {
+        max-height: 220px;
+        overflow-y: auto;
     }
 
     .soporte-main,

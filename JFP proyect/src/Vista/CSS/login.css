@@ -185,12 +185,3 @@ select:focus-visible {
         max-height: 76px;
     }
 }
-
-/* RESPONSIVE: Ajustes para pantallas grandes (mín 768px) */
-@media (min-width: 768px) {
-    /* Mayor sombra y padding en escritorio para más profundidad visual */
-    .login {
-        padding: 28px;
-        box-shadow: var(--shadow-md);
-    }
-}

@@ -184,27 +184,6 @@ select:focus-visible {
     outline-offset: 2px;
 }
 
-@media (min-width: 576px) {
-    .registro-form {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .registro-field:nth-child(3),
-    .registro-field:nth-child(4),
-    .registro-field:nth-child(5),
-    .registro-field:nth-child(6),
-    .registro-actions {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (min-width: 768px) {
-    .registro {
-        padding: 28px;
-        box-shadow: var(--shadow-md);
-    }
-}
-
 @media (max-width: 420px) {
     .registro {
         padding: 20px;
