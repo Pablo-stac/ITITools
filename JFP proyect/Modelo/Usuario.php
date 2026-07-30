@@ -194,22 +194,57 @@ class Usuario
     }
 
     /**
-     * Inicia la sesión del usuario.
+     * Autentica al usuario con las credenciales proporcionadas.
      *
-     * @return void
+     * @return array Resultado con éxito, mensaje y rol.
      */
-    public function iniciarSesion(): void
+    public function autenticar(): array
     {
-        // Lógica de inicio de sesión en futuras etapas.
+        $usuariosValidos = [
+            [
+                'email' => 'admin@iti.edu.uy',
+                'password' => '1234',
+                'rol' => 'administrador'
+            ],
+            [
+                'email' => 'soporte@iti.edu.uy',
+                'password' => '1234',
+                'rol' => 'soporte'
+            ],
+            [
+                'email' => 'solicitante@iti.edu.uy',
+                'password' => '1234',
+                'rol' => 'solicitante'
+            ]
+        ];
+
+        foreach ($usuariosValidos as $usuarioValido) {
+            if ($usuarioValido['email'] === $this->correo && $usuarioValido['password'] === $this->contrasena) {
+                return [
+                    'exito' => true,
+                    'mensaje' => 'Inicio de sesión correcto.',
+                    'rol' => $usuarioValido['rol']
+                ];
+            }
+        }
+
+        return [
+            'exito' => false,
+            'mensaje' => 'Email o contraseña incorrectos.',
+            'rol' => null
+        ];
     }
 
     /**
      * Cierra la sesión del usuario.
      *
-     * @return void
+     * @return array Resultado con éxito y mensaje.
      */
-    public function cerrarSesion(): void
+    public function cerrarSesion(): array
     {
-        // Lógica de cierre de sesión en futuras etapas.
+        return [
+            'exito' => true,
+            'mensaje' => 'Sesión cerrada correctamente.'
+        ];
     }
 }

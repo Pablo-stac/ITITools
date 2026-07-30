@@ -34,6 +34,31 @@ class UsuarioRepository extends BaseRepository
     }
 
     /**
+     * Busca un usuario por su identificador.
+     *
+     * @param int $idUsuario
+     * @return Usuario|null
+     */
+    public function findById(int $idUsuario): ?Usuario
+    {
+        $sql = 'SELECT * FROM usuarios WHERE idUsuario = :idUsuario LIMIT 1';
+        $row = $this->fetchOne($sql, ['idUsuario' => $idUsuario]);
+
+        if ($row === null) {
+            return null;
+        }
+
+        return new Usuario(
+            (int) $row['idUsuario'],
+            $row['nombre'],
+            $row['apellido'],
+            $row['correo'],
+            $row['contrasena'],
+            (bool) $row['estado']
+        );
+    }
+
+    /**
      * Inserta un nuevo usuario en la base de datos.
      *
      * @param Usuario $usuario

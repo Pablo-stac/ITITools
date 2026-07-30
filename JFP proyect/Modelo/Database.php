@@ -77,7 +77,7 @@ class Database
         return [
             'host' => getenv('DB_HOST') ?: '127.0.0.1',
             'port' => getenv('DB_PORT') ?: '3306',
-            'database' => getenv('DB_NAME') ?: 'sgrsi',
+            'database' => getenv('DB_NAME') ?: 'sgri',
             'username' => getenv('DB_USER') ?: 'root',
             'password' => getenv('DB_PASS') ?: '',
             'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',

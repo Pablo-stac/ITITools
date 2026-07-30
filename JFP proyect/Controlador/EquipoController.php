@@ -4,54 +4,122 @@ require_once __DIR__ . '/../Modelo/Equipo.php';
 
 /**
  * Controlador para gestionar el inventario de equipos.
+ * Recibe las acciones de la vista, valida los datos básicos y delega la lógica
+ * de negocio en el modelo.
  */
 class EquipoController
 {
     /**
-     * Constructor del controlador.
-     */
-    public function __construct()
-    {
-        // Preparado para futuras dependencias o conexión con base de datos.
-    }
-
-    /**
      * Registra un nuevo equipo en el inventario.
      *
-     * @return void
+     * @param array $datos Datos enviados desde la vista.
+     * @return array Resultado con éxito, mensaje y equipo.
      */
-    public function registrarEquipo(): void
+    public function registrarEquipo(array $datos): array
     {
-        // Aquí se registrará un nuevo equipo.
+        $errores = $this->validarDatosBasicos($datos, ['codigoInventario', 'tipo', 'marca', 'modelo', 'numeroSerie']);
+        if (!empty($errores)) {
+            return [
+                'exito' => false,
+                'mensaje' => 'Complete los campos obligatorios.',
+                'errores' => $errores,
+                'equipo' => null
+            ];
+        }
+
+        $equipo = new Equipo(0, '', '', '', '', '', 'disponible');
+        return $equipo->registrarEquipo($datos);
     }
 
     /**
      * Modifica los datos de un equipo existente.
      *
-     * @return void
+     * @param array $datos Datos enviados desde la vista.
+     * @return array Resultado con éxito, mensaje y equipo.
      */
-    public function modificarEquipo(): void
+    public function modificarEquipo(array $datos): array
     {
-        // Aquí se actualizará la información del equipo.
+        if (empty($datos['idEquipo']) || !is_numeric($datos['idEquipo'])) {
+            return [
+                'exito' => false,
+                'mensaje' => 'Debe indicar un identificador de equipo válido.',
+                'errores' => ['idEquipo' => 'Identificador inválido'],
+                'equipo' => null
+            ];
+        }
+
+        $equipo = new Equipo((int) $datos['idEquipo'], '', '', '', '', '', 'disponible');
+        return $equipo->modificarEquipo($datos);
     }
 
     /**
-     * Elimina un equipo del inventario.
+     * Marca un equipo como eliminado o dado de baja.
      *
-     * @return void
+     * @param int $idEquipo Identificador del equipo.
+     * @return array Resultado con éxito, mensaje y equipo.
      */
-    public function eliminarEquipo(): void
+    public function eliminarEquipo(int $idEquipo): array
     {
-        // Aquí se eliminará el equipo del sistema.
+        if ($idEquipo <= 0) {
+            return [
+                'exito' => false,
+                'mensaje' => 'El identificador del equipo no es válido.',
+                'errores' => ['idEquipo' => 'Identificador inválido'],
+                'equipo' => null
+            ];
+        }
+
+        $equipo = new Equipo($idEquipo, '', '', '', '', '', 'disponible');
+        return $equipo->eliminarEquipo();
     }
 
     /**
-     * Actualiza el estado del equipo.
+     * Actualiza el estado de un equipo.
      *
-     * @return void
+     * @param array $datos Datos enviados desde la vista.
+     * @return array Resultado con éxito, mensaje y equipo.
      */
-    public function actualizarEstado(): void
+    public function actualizarEstado(array $datos): array
     {
-        // Aquí se cambiará el estado del equipo.
+        if (empty($datos['idEquipo']) || !is_numeric($datos['idEquipo'])) {
+            return [
+                'exito' => false,
+                'mensaje' => 'Debe indicar un identificador de equipo válido.',
+                'errores' => ['idEquipo' => 'Identificador inválido'],
+                'equipo' => null
+            ];
+        }
+
+        if (empty($datos['estado'])) {
+            return [
+                'exito' => false,
+                'mensaje' => 'Debe indicar un estado para el equipo.',
+                'errores' => ['estado' => 'Estado obligatorio'],
+                'equipo' => null
+            ];
+        }
+
+        $equipo = new Equipo((int) $datos['idEquipo'], '', '', '', '', '', 'disponible');
+        return $equipo->actualizarEstado((string) $datos['estado']);
+    }
+
+    /**
+     * Valida los campos obligatorios básicos recibidos desde la vista.
+     *
+     * @param array $datos Datos enviados desde la vista.
+     * @param array $camposObligatorios Lista de campos requeridos.
+     * @return array Lista de errores encontrados.
+     */
+    private function validarDatosBasicos(array $datos, array $camposObligatorios): array
+    {
+        $errores = [];
+
+        foreach ($camposObligatorios as $campo) {
+            if (!isset($datos[$campo]) || trim((string) $datos[$campo]) === '') {
+                $errores[$campo] = 'Campo obligatorio';
+            }
+        }
+
+        return $errores;
     }
 }

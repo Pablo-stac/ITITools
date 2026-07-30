@@ -1,37 +1,22 @@
 // ===============================
-// Datos de usuarios y referencias al DOM
+// Captura de eventos de la vista
 // ===============================
-// Array de usuarios válidos del sistema con email, contraseña y rol asignado
-// Nota: En producción, esto debería venir de una API backend segura
-const usuarios = [
-    {
-        email: "admin@iti.edu.uy",
-        password: "1234",
-        rol: "administrador"
-    },
-    {
-        email: "soporte@iti.edu.uy",
-        password: "1234",
-        rol: "soporte"
-    },
-    {
-        email: "solicitante@iti.edu.uy",
-        password: "1234",
-        rol: "solicitante"
-    }
-];
-
-// Elementos del formulario de inicio de sesión obtenidos del DOM
+// El JavaScript de interfaz solo recoge el envío del formulario, valida
+// datos básicos y envía la solicitud al controlador a través del servidor.
 const loginForm = document.querySelector('.login-form');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
+const mensajeLogin = document.getElementById('mensaje-login');
 
-// ===============================
-// Redirección por rol de usuario
-// ===============================
-// Función: Redirige al usuario a la página correspondiente según su rol
-// Parámetro: rol (string) - 'administrador', 'soporte' o 'solicitante'
-// Retorna: void - Cambia window.location o muestra alerta de error
+function mostrarMensaje(texto, tipo) {
+    if (!mensajeLogin) {
+        return;
+    }
+
+    mensajeLogin.textContent = texto;
+    mensajeLogin.className = `login-mensaje ${tipo}`;
+}
+
 function redirigirPorRol(rol) {
     if (rol === 'administrador') {
         window.location.href = 'administrador.html';
@@ -48,35 +33,42 @@ function redirigirPorRol(rol) {
         return;
     }
 
-    alert('Rol de usuario no válido.');
+    mostrarMensaje('Rol de usuario no válido.', 'error');
 }
 
-// ===============================
-// Manejo del envío del formulario
-// ===============================
-// Verifica credenciales ingresadas contra el array de usuarios
-// Si hay coincidencia: obtiene el rol y redirige
-// Si no hay coincidencia: muestra mensaje de error
 if (loginForm && emailInput && passwordInput) {
-    // Escucha el envío del formulario y evita el comportamiento por defecto
-    loginForm.addEventListener('submit', (event) => {
+    loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const email = emailInput.value.trim();
         const password = passwordInput.value;
 
-        // Busca un usuario cuya combinación de email y contraseña coincida
-        const usuario = usuarios.find((u) => u.email === email && u.password === password);
-
-        // Si no se encuentra usuario, muestra un mensaje claro y no redirige
-        if (!usuario) {
-            alert('Email o contraseña incorrectos.');
+        if (!email || !password) {
+            mostrarMensaje('Complete los campos obligatorios.', 'error');
             return;
         }
 
-        redirigirPorRol(usuario.rol);
+        try {
+            const respuesta = await fetch('../../../procesar_login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: new URLSearchParams({ email, password })
+            });
+
+            const resultado = await respuesta.json();
+
+            if (!resultado.exito) {
+                mostrarMensaje(resultado.mensaje || 'No se pudo iniciar sesión.', 'error');
+                return;
+            }
+
+            redirigirPorRol(resultado.rol);
+        } catch (error) {
+            mostrarMensaje('No fue posible conectar con el servidor.', 'error');
+        }
     });
 } else {
-    // Aviso útil durante el desarrollo cuando faltan elementos en la página
     console.warn('login.js: no se encontró el formulario o los campos de inicio de sesión.');
 }

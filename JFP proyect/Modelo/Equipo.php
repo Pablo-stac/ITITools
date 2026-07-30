@@ -1,7 +1,9 @@
 <?php
 
 /**
- * Clase que representa un equipo tecnológico del inventario del sistema SGRSI.
+ * Clase que representa un equipo tecnológico del inventario del sistema.
+ * Encapsula la lógica de negocio relacionada con el registro, edición,
+ * eliminación y cambio de estado del equipo.
  */
 class Equipo
 {
@@ -224,12 +226,157 @@ class Equipo
     }
 
     /**
+     * Registra un nuevo equipo aplicando reglas de negocio básicas.
+     *
+     * @param array $datos Datos recibidos desde el controlador.
+     * @return array Resultado con éxito y mensaje.
+     */
+    public function registrarEquipo(array $datos): array
+    {
+        $this->setCodigoInventario($this->normalizarTexto($datos['codigoInventario'] ?? ''));
+        $this->setTipo($this->normalizarTexto($datos['tipo'] ?? ''));
+        $this->setMarca($this->normalizarTexto($datos['marca'] ?? ''));
+        $this->setModelo($this->normalizarTexto($datos['modelo'] ?? ''));
+        $this->setNumeroSerie($this->normalizarTexto($datos['numeroSerie'] ?? ''));
+        $this->setEstado($this->normalizarEstado($datos['estado'] ?? 'disponible'));
+
+        if ($this->codigoInventario === '' || $this->tipo === '' || $this->marca === '' || $this->modelo === '' || $this->numeroSerie === '') {
+            return [
+                'exito' => false,
+                'mensaje' => 'Todos los campos obligatorios deben contener información válida.',
+                'equipo' => null
+            ];
+        }
+
+        if (strlen($this->codigoInventario) < 3) {
+            return [
+                'exito' => false,
+                'mensaje' => 'El código de inventario debe tener al menos 3 caracteres.',
+                'equipo' => null
+            ];
+        }
+
+        return [
+            'exito' => true,
+            'mensaje' => 'Equipo registrado correctamente.',
+            'equipo' => $this
+        ];
+    }
+
+    /**
+     * Modifica los datos del equipo actual.
+     *
+     * @param array $datos Datos recibidos desde el controlador.
+     * @return array Resultado con éxito y mensaje.
+     */
+    public function modificarEquipo(array $datos): array
+    {
+        if (empty($datos['idEquipo']) || !is_numeric($datos['idEquipo'])) {
+            return [
+                'exito' => false,
+                'mensaje' => 'No se pudo identificar el equipo a modificar.',
+                'equipo' => null
+            ];
+        }
+
+        $this->setIdEquipo((int) $datos['idEquipo']);
+        $this->setCodigoInventario($this->normalizarTexto($datos['codigoInventario'] ?? $this->getCodigoInventario()));
+        $this->setTipo($this->normalizarTexto($datos['tipo'] ?? $this->getTipo()));
+        $this->setMarca($this->normalizarTexto($datos['marca'] ?? $this->getMarca()));
+        $this->setModelo($this->normalizarTexto($datos['modelo'] ?? $this->getModelo()));
+        $this->setNumeroSerie($this->normalizarTexto($datos['numeroSerie'] ?? $this->getNumeroSerie()));
+        $this->setEstado($this->normalizarEstado($datos['estado'] ?? $this->getEstado()));
+
+        if ($this->codigoInventario === '' || $this->tipo === '' || $this->marca === '' || $this->modelo === '' || $this->numeroSerie === '') {
+            return [
+                'exito' => false,
+                'mensaje' => 'No se pueden dejar campos obligatorios vacíos al modificar el equipo.',
+                'equipo' => null
+            ];
+        }
+
+        return [
+            'exito' => true,
+            'mensaje' => 'Equipo actualizado correctamente.',
+            'equipo' => $this
+        ];
+    }
+
+    /**
+     * Marca el equipo como dado de baja.
+     *
+     * @return array Resultado con éxito y mensaje.
+     */
+    public function eliminarEquipo(): array
+    {
+        $this->setEstado('dado_de_baja');
+
+        return [
+            'exito' => true,
+            'mensaje' => 'Equipo dado de baja correctamente.',
+            'equipo' => $this
+        ];
+    }
+
+    /**
      * Actualiza el estado del equipo.
      *
-     * @return void
+     * @param string $nuevoEstado Nuevo estado del equipo.
+     * @return array Resultado con éxito y mensaje.
      */
-    public function actualizarEstado(): void
+    public function actualizarEstado(string $nuevoEstado): array
     {
-        // Lógica para actualizar el estado del equipo en futuras etapas.
+        $estadoNormalizado = $this->normalizarEstado($nuevoEstado);
+
+        if ($estadoNormalizado === '') {
+            return [
+                'exito' => false,
+                'mensaje' => 'El estado proporcionado no es válido.',
+                'equipo' => null
+            ];
+        }
+
+        $this->setEstado($estadoNormalizado);
+
+        return [
+            'exito' => true,
+            'mensaje' => 'Estado del equipo actualizado correctamente.',
+            'equipo' => $this
+        ];
+    }
+
+    /**
+     * Devuelve si el equipo está disponible para préstamo.
+     *
+     * @return bool
+     */
+    public function estaDisponible(): bool
+    {
+        return $this->estado === 'disponible';
+    }
+
+    /**
+     * Normaliza el texto eliminando espacios innecesarios.
+     *
+     * @param string $valor Valor a normalizar.
+     * @return string
+     */
+    private function normalizarTexto(string $valor): string
+    {
+        return trim($valor);
+    }
+
+    /**
+     * Normaliza y valida el estado del equipo.
+     *
+     * @param string $estado Estado recibido.
+     * @return string
+     */
+    private function normalizarEstado(string $estado): string
+    {
+        $estadoNormalizado = strtolower(trim($estado));
+        $estadosPermitidos = ['disponible', 'en_uso', 'en_mantenimiento', 'dado_de_baja'];
+
+        return in_array($estadoNormalizado, $estadosPermitidos, true) ? $estadoNormalizado : 'disponible';
     }
 }
