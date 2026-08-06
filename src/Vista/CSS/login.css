@@ -1,0 +1,187 @@
+/* ================= LOGIN - Service Desk UI ================= */
+/* DESCRIPCIÓN: Estilos para la página de autenticación del sistema
+   - Formulario centrado en pantalla
+   - Validación visual de campos
+   - Diseño responsive para móvil y escritorio
+   - Tema de color corporativo azul */
+
+/* Variables de color y estilo global para la página de login */
+:root {
+    --color-primary: #1e4d8b;
+    --color-primary-hover: #183F72;
+    --color-bg: #F8F9FB;
+    --color-bg-soft: #F0F4F9;
+    --color-bg-accent: #E8EFF7;
+    --color-border: #E2E8F0;
+    --color-text: #1F2937;
+    --color-muted: #6B7280;
+    --color-white: #FFFFFF;
+    --color-input: #F8FAFC;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* Reinicio ligero y ajustes base para todos los elementos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Contenedor principal del formulario de inicio de sesión */
+.login {
+    width: 100%;
+    max-width: 430px;
+    padding: 20px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.login-header {
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.logo {
+    display: block;
+    width: 100%;
+    max-height: 92px;
+    margin: 0 auto 18px;
+    object-fit: contain;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+}
+
+.login h1 {
+    color: var(--color-primary);
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* FORMULARIO: Estructura vertical con espaciado uniforme */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* CAMPOS: Etiquetas y controles del formulario */
+.login-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--color-text);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.login-field input,
+.login-field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-input);
+    color: var(--color-text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.login-field input:focus,
+.login-field select:focus {
+    border-color: var(--color-primary);
+    background: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(30, 77, 139, 0.14);
+}
+
+/* ACCIONES: Botón de envío y enlaces alternativos */
+.login-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+/* Botón principal de login con estados hover/focus */
+.login-actions button {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 18px;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-actions button:hover,
+.login-actions button:focus-visible {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    box-shadow: 0 8px 18px rgba(30, 77, 139, 0.16);
+}
+
+/* Enlace a registro para nuevos usuarios */
+.login-actions a {
+    color: var(--color-muted);
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: color 0.25s ease;
+}
+
+/* Estados interactivos del enlace */
+.login-actions a:hover,
+.login-actions a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* ACCESIBILIDAD: Outline visible para navegación por teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid rgba(30, 77, 139, 0.18);
+    outline-offset: 2px;
+}
+
+/* RESPONSIVE: Ajustes para pantallas pequeñas (máx 420px) */
+@media (max-width: 420px) {
+    .login {
+        padding: 20px;
+    }
+
+    .logo {
+        max-height: 76px;
+    }
+}
