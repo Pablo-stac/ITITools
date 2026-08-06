@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<!-- Página del solicitante: formulario de solicitudes y tablero de seguimiento -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="theme-stylesheet" rel="stylesheet" href="../CSS/Modo claro/solicitante.css">
+    <title>Solicitante</title>
+</head>
+<body>
+    <!-- Encabezado del portal de solicitante con menú y estado del usuario -->
+    <header class="solicitante-header">
+        <div class="brand">
+            <h1>Portal de Solicitantes</h1>
+            <p>Registro y seguimiento de incidencias y solicitudes de servicio</p>
+        </div>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">🌙</button>
+            <button type="button" class="nav-toggle" aria-controls="solicitante-nav" aria-expanded="false">☰</button>
+        </div>
+        <!-- Navegación principal con 7 opciones de acceso rápido -->
+        <nav id="solicitante-nav" class="solicitante-nav">
+            <a href="#registro-incidencia" class="tab-link active" data-tab="registro-incidencia">Registrar incidencia</a>
+            <a href="#consulta-estado" class="tab-link" data-tab="consulta-estado">Consultar estado</a>
+            <a href="#registro-servicio" class="tab-link" data-tab="registro-servicio">Solicitar servicio</a>
+            <a href="#registro-laboratorio" class="tab-link" data-tab="registro-laboratorio">Solicitar laboratorio</a>
+            <a href="#registro-prestamo" class="tab-link" data-tab="registro-prestamo">Solicitar préstamo</a>
+            <a href="#informacion" class="tab-link" data-tab="informacion">Información</a>
+            <a href="login.html" class="logout-link">Cerrar sesión</a>
+        </nav>
+    </header>
+
+    <!-- Área principal del solicitante con formularios y tablas de seguimiento -->
+    <main class="solicitante-main">
+        <!-- SECCIÓN 1: Formulario para registrar incidencias técnicas -->
+        <section id="registro-incidencia" class="panel tab-panel active" role="tabpanel">
+            <h2>Registrar incidencia técnica</h2>
+            <p>Complete el formulario para reportar un problema técnico o un requerimiento de asistencia.</p>
+
+            <form action="solicitante.html" method="post" class="solicitante-form">
+
+                <div class="solicitante-field">
+                    <label for="fecha-incidencia">Fecha</label>
+                    <input type="date" id="fecha-incidencia" name="fecha_incidencia" required>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="area-incidencia">Laboratorio / Taller</label>
+                    <select id="area-incidencia" name="area_incidencia" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="laboratorio-1">Laboratorio 1</option>
+                        <option value="laboratorio-2">Laboratorio 2</option>
+                        <option value="laboratorio-3">Laboratorio 3</option>
+                        <option value="laboratorio-4">Laboratorio 4</option>
+                        <option value="laboratorio-5">Laboratorio 5</option>
+                        <option value="laboratorio-6">Laboratorio 6</option>
+                        <option value="taller-1">Taller 1</option>
+                        <option value="taller-2">Taller 2</option>
+                        <option value="taller-3">Taller 3</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="pc-afectada">PC afectada</label>
+                    <select id="pc-afectada" name="pc_afectada" required>
+                        <option value="">Seleccione una PC</option>
+                        <option value="PC-01">PC 01</option>
+                        <option value="PC-02">PC 02</option>
+                        <option value="PC-03">PC 03</option>
+                        <option value="PC-04">PC 04</option>
+                        <option value="PC-05">PC 05</option>
+                        <option value="PC-06">PC 06</option>
+                        <option value="PC-07">PC 07</option>
+                        <option value="PC-08">PC 08</option>
+                        <option value="PC-09">PC 09</option>
+                        <option value="PC-10">PC 10</option>
+                        <option value="PC-11">PC 11</option>
+                        <option value="PC-12">PC 12</option>
+                        <option value="PC-13">PC 13</option>
+                        <option value="PC-14">PC 14</option>
+                        <option value="PC-15">PC 15</option>
+                        <option value="PC-16">PC 16</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="anio-grupo">Grado</label>
+                    <select id="anio-grupo" name="anio_grupo" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="1">1er</option>
+                        <option value="2">2do</option>
+                        <option value="3">3ro</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="grupo">Grupo</label>
+                    <select id="grupo" name="grupo" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="MA">MA</option>
+                        <option value="MB">MB</option>
+                        <option value="MC">MC</option>
+                        <option value="MD">MD</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="turno">Turno</label>
+                    <select id="turno" name="turno" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="matutino">Matutino</option>
+                        <option value="vespertino">Vespertino</option>
+                        <option value="nocturno">Nocturno</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="hora-entrada">Hora de entrada</label>
+                    <input type="time" id="hora-entrada" name="hora_entrada" required>
+                </div>
+
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="hora-salida">Hora de salida</label>
+                    <input type="time" id="hora-salida" name="hora_salida" required>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="tipo-incidencia">Tipo de incidencia</label>
+                    <select id="tipo-incidencia" name="tipo_incidente" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                        <option value="red">Red / Conectividad</option>
+                        <option value="periferico">Periférico</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field">
+                    <label for="asunto-incidencia">Asunto</label>
+                    <input type="text" id="asunto-incidencia" name="asunto_incidente" placeholder="Título breve de la incidencia" required>
+                </div>
+
+                <div class="solicitante-field solicitante-field-wide">
+                    <label for="descripcion-incidencia">Descripción detallada</label>
+                    <textarea id="descripcion-incidencia"
+                        name="descripcion_incidente"
+                        rows="4"
+                        placeholder="Describa el problema o la solicitud con la mayor información de ser posible" required></textarea>
+                </div>
+
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_incidencia">
+                        Enviar incidencia
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+        <section id="consulta-estado" class="panel tab-panel" role="tabpanel" hidden>
+            <h2>Consultar estado de solicitudes</h2>
+            <p>Verifique el estado de sus incidencias y solicitudes registradas.</p>
+
+            <div class="estado-summary">
+                <table class="estado-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15/05/2026</td>
+                            <td>Incidencia</td>
+                            <td>No enciende equipo</td>
+                            <td>Pendiente</td>
+                            <td>Asignado a soporte</td>
+                        </tr>
+                        <tr>
+                            <td>10/05/2026</td>
+                            <td>Servicio</td>
+                            <td>Instalación de software</td>
+                            <td>En proceso</td>
+                            <td>Programado para mañana</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="registro-servicio" class="panel tab-panel" role="tabpanel" hidden>
+            <h2>Solicitar servicio</h2>
+            <p>Realice solicitudes de servicio para instalación de software o configuración de equipos.</p>
+
+            <form action="solicitante.html" method="post" class="solicitante-form">
+                <div class="solicitante-field">
+                    <label for="tipo-servicio">Tipo de servicio</label>
+                    <select id="tipo-servicio" name="tipo_servicio" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="instalacion-software">Instalación de software</option>
+                        <option value="configuracion-equipo">Configuración de equipo</option>
+                        <option value="otro-servicio">Otro servicio</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field solicitante-field-wide">
+                    <label for="descripcion-servicio">Descripción del servicio</label>
+                    <textarea id="descripcion-servicio" name="descripcion_servicio" rows="4" placeholder="Explique la necesidad del servicio" required></textarea>
+                </div>
+
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_servicio">Enviar solicitud</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="registro-laboratorio" class="panel tab-panel" role="tabpanel" hidden>
+            <h2>Solicitar laboratorio o taller</h2>
+            <p>Solicite la preparación o reserva de un laboratorio o taller para un día específico.</p>
+
+            <form action="solicitante.html" method="post" class="solicitante-form">
+                <div class="solicitante-field">
+                    <label for="tipo-laboratorio">Tipo</label>
+                    <select id="tipo-laboratorio" name="tipo_laboratorio" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="laboratorio-1">Laboratorio 1</option>
+                        <option value="laboratorio-2">Laboratorio 2</option>
+                        <option value="laboratorio-3">Laboratorio 3</option>
+                        <option value="laboratorio-4">Laboratorio 4</option>
+                        <option value="laboratorio-5">Laboratorio 5</option>
+                        <option value="laboratorio-6">Laboratorio 6</option>
+                        <option value="taller-1">Taller 1</option>
+                        <option value="taller-2">Taller 2</option>
+                        <option value="taller-3">Taller 3</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="solicitante-field solicitante-field-wide">
+                    <label for="descripcion-laboratorio">Descripción</label>
+                    <textarea id="descripcion-laboratorio" name="descripcion_laboratorio" rows="4" placeholder="Indique el objetivo y necesidades del laboratorio/taller" required></textarea>
+                </div>
+
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="fecha-laboratorio">Fecha requerida</label>
+                    <input type="date" id="fecha-laboratorio" name="fecha_entrega" required>
+                </div>
+
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_laboratorio">Enviar solicitud de laboratorio</button>
+                </div>
+
+            </form>
+        </section>
+
+        <section id="registro-prestamo" class="panel tab-panel" role="tabpanel" hidden>
+            <h2>Solicitar préstamo de equipo</h2>
+            <p>Solicite un préstamo indicando fecha de entrega y fecha de devolución.</p>
+
+            <form action="solicitante.html" method="post" class="solicitante-form">
+                <div class="solicitante-field">
+                    <label for="item-prestamo">Equipo o material</label>
+                    <input type="text" id="item-prestamo" name="item_prestamo" placeholder="Descripción del equipo" required>
+                </div>
+
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="fecha-entrega">Fecha de entrega</label>
+                    <input type="date" id="fecha-entrega" name="fecha_entrega" required>
+                </div>
+
+                <div class="solicitante-field solicitante-field-compact">
+                    <label for="fecha-devolucion">Fecha de devolución</label>
+                    <input type="date" id="fecha-devolucion" name="fecha_devolucion" required>
+                </div>
+
+                <div class="solicitante-actions">
+                    <button type="submit" name="registrar_prestamo">Solicitar préstamo</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="informacion" class="panel tab-panel" role="tabpanel" hidden>
+            <h2>Bienvenido, solicitante</h2>
+            <p>Acceso seguro y autenticado. Desde aquí puede revisar todas sus solicitudes, crear nuevos tickets y conocer el seguimiento de su atención.</p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Acceso</h3>
+                    <p>Ingreso mediante usuario y contraseña institucional.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Tipos de solicitud</h3>
+                    <p>Incidencias técnicas, preparación de laboratorios, instalación de software y configuración de equipos.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Estados</h3>
+                    <p>Pendiente, en proceso o resuelta.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('solicitante-nav');
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                nav.classList.toggle('open', !expanded);
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        }
+
+        tabLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.dataset.tab;
+
+                tabLinks.forEach((item) => item.classList.toggle('active', item === link));
+                tabPanels.forEach((panel) => {
+                    const isActive = panel.id === target;
+                    panel.classList.toggle('active', isActive);
+                    panel.hidden = !isActive;
+                });
+
+                if (window.matchMedia('(max-width: 767px)').matches && navToggle && nav) {
+                    nav.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    </script>
+    <script src="../JS/theme-toggle.js" defer></script>
+    <script src="../JS/fecha.js" defer></script>
+    <script src="../JS/hora.js" defer></script>
+</body>
+</html>

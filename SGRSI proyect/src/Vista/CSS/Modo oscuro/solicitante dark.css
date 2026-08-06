@@ -1,0 +1,654 @@
+/* ================= SOLICITANTE - Service Desk UI ================= */
+/* DESCRIPCIÓN: Portal para usuarios solicitantes de servicios IT
+   - Registrar incidencias técnicas con fecha y detalles
+   - Solicitar servicios, laboratorios y préstamos
+   - Consultar estado de solicitudes en tiempo real
+   - Información y documentación de procedimientos
+   - Menú expandible en móvil con 7 opciones de navegación */
+
+/* Variables globales y colores para el portal de solicitantes */
+:root {
+    --color-primary: #60A5FA;
+    --color-primary-hover: #3B82F6;
+    --color-bg: #0F172A;
+    --color-bg-soft: #111827;
+    --color-bg-accent: #1E293B;
+    --color-border: #334155;
+    --color-text: #E2E8F0;
+    --color-muted: #94A3B8;
+    --color-white: #FFFFFF;
+    --color-input: #1F2937;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 8px 18px rgba(30, 77, 139, 0.16);
+    --shadow-focus: 0 0 0 4px rgba(30, 77, 139, 0.14);
+    --transition-default: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    --container: 1200px;
+}
+
+/* Reinicio de estilos y base tipográfica para la página de solicitante */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+        align-items: flex-start;
+    }
+
+    .solicitante-header {
+        width: 25%;
+        max-width: 320px;
+        min-width: 240px;
+        min-height: 100vh;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 24px 20px;
+        border-right: 1px solid var(--color-border);
+        border-bottom: none;
+        position: sticky;
+        top: 0;
+    }
+
+    .brand {
+        width: 100%;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    .solicitante-nav {
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+        position: static;
+        top: auto;
+        background: transparent;
+    }
+
+    .solicitante-nav a {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .solicitante-main {
+        flex: 1;
+        max-width: none;
+        padding: 24px 24px 40px;
+    }
+}
+
+/* Encabezado fijo y menú del portal de solicitantes */
+/* NAVEGACIÓN: Encabezado con título y menú responsive */
+.solicitante-header {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* BRAND: Identificación del portal */
+.brand {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.brand h1 {
+    color: var(--color-primary);
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.brand p {
+    max-width: 680px;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+    .solicitante-header {
+        width: 25%;
+        max-width: 300px;
+        min-width: 220px;
+        min-height: 100vh;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 24px 20px;
+        border-right: 1px solid var(--color-border);
+        border-bottom: none;
+        position: sticky;
+        top: 0;
+    }
+
+    .brand p {
+        display: none;
+    }
+
+    .header-actions {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    .solicitante-nav {
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+        position: static;
+        top: auto;
+        background: transparent;
+    }
+
+    .solicitante-nav a {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .solicitante-main {
+        flex: 1;
+        max-width: none;
+        padding: 24px 24px 40px;
+    }
+}
+
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+    color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition-default);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    background: var(--color-bg-accent);
+    border-color: #C9D7E8;
+}
+
+.nav-toggle {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition-default);
+}
+
+.nav-toggle:hover {
+    background: var(--color-bg-accent);
+    border-color: #C9D7E8;
+}
+
+.solicitante-nav {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    position: sticky;
+    top: 88px;
+    z-index: 999;
+    background: var(--color-bg);
+}
+
+.solicitante-nav.open {
+    display: flex;
+}
+
+.solicitante-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 14px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: var(--transition-default);
+}
+
+.solicitante-nav a:hover,
+.solicitante-nav a:focus-visible {
+    background: var(--color-bg-accent);
+    border-color: #C9D7E8;
+    color: var(--color-primary);
+}
+
+.solicitante-nav .logout-link {
+    background: #C62828;
+    color: var(--color-white);
+}
+
+.solicitante-nav .logout-link:hover,
+.solicitante-nav .logout-link:focus-visible {
+    background: #A91F1F;
+    border-color: #8F1B1B;
+    color: var(--color-white);
+}
+
+.solicitante-main {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+}
+
+.panel {
+    margin-bottom: 18px;
+    padding: 20px;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.panel h2 {
+    margin-bottom: 8px;
+    color: var(--color-text);
+    font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.panel > p {
+    max-width: 820px;
+    color: var(--color-muted);
+    font-size: 0.98rem;
+}
+
+/* FORMULARIOS: Grid adaptativo para solicitudes de servicios */
+.solicitante-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* CAMPOS: Estilos de inputs select y textarea en solicitudes */
+.solicitante-field,
+.solicitante-field-wide,
+.solicitante-field-compact {
+    width: 100%;
+}
+
+.solicitante-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--color-text);
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.solicitante-field input,
+.solicitante-field select,
+.solicitante-field textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-input);
+    color: var(--color-text);
+    font: inherit;
+    outline: none;
+    transition: var(--transition-default);
+}
+
+.solicitante-field textarea {
+    min-height: 128px;
+    resize: vertical;
+}
+
+.solicitante-field input::placeholder,
+.solicitante-field textarea::placeholder {
+    color: #94A3B8;
+}
+
+.solicitante-field input:focus,
+.solicitante-field select:focus,
+.solicitante-field textarea:focus {
+    border-color: var(--color-primary);
+    background: var(--color-bg-soft);
+    box-shadow: var(--shadow-focus);
+}
+
+.solicitante-actions {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.solicitante-actions button {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 18px;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition: var(--transition-default);
+}
+
+.solicitante-actions button:hover,
+.solicitante-actions button:focus-visible {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    box-shadow: var(--shadow-hover);
+}
+
+.estado-summary {
+    margin-top: 18px;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+}
+
+.estado-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--color-bg-soft);
+}
+
+.estado-table th,
+.estado-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-align: left;
+    vertical-align: top;
+}
+
+.estado-table th {
+    background: var(--color-bg-accent);
+    color: var(--color-text);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.estado-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.estado-table tbody tr:hover {
+    background: var(--color-bg-soft);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.info-card {
+    padding: 18px;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.info-card h3 {
+    margin-bottom: 8px;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.info-card p {
+    color: var(--color-muted);
+}
+
+/* ACCESIBILIDAD: Estados visuales para navegación por teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(30, 77, 139, 0.18);
+    outline-offset: 2px;
+}
+
+@media (max-width: 585px) {
+    .solicitante-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 12px;
+    }
+
+    .brand {
+        min-width: 0;
+        grid-column: 1;
+    }
+
+    .brand h1 {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .brand p {
+        display: none;
+    }
+
+    .nav-toggle {
+        grid-column: 2;
+        justify-self: end;
+        flex-shrink: 0;
+    }
+
+    .solicitante-nav {
+        grid-column: 1 / -1;
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        top: auto;
+        background: transparent;
+    }
+}
+
+.solicitante-main::before {
+    content: "Dashboard de Solicitantes";
+    display: block;
+    min-height: 150px;
+    padding: 20px;
+    margin-bottom: 18px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-image:
+        linear-gradient(90deg, rgba(30, 77, 139, 0.88), rgba(30, 77, 139, 0.5)),
+        url("../../IMG/utu entrada.jpg"),
+        url("../../IMG/pasillo.jpg"),
+        url("../../IMG/salon.jpg");
+    background-size: 100% 100%, 33% 100%, 33% 100%, 33% 100%;
+    background-position: center, left center, center center, right center;
+    background-repeat: no-repeat;
+    box-shadow: var(--shadow-sm);
+    color: var(--color-white);
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+@media (max-width: 767px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .solicitante-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .solicitante-nav {
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .solicitante-main,
+    .panel,
+    .estado-summary {
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .estado-summary {
+        overflow-x: auto;
+    }
+
+    .estado-table {
+        min-width: 560px;
+    }
+}
+
+/* Escritorio: el panel lateral permanece visible y no depende del botón móvil. */
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+        align-items: flex-start;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    .solicitante-header {
+        display: flex;
+        width: 25%;
+        max-width: 300px;
+        min-width: 220px;
+        min-height: 100vh;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 24px 20px;
+        border-right: 1px solid var(--color-border);
+        border-bottom: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-shrink: 0;
+    }
+
+    .brand { width: 100%; }
+    .brand p { display: none; }
+
+    .header-actions {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        width: calc(100% - 40px);
+        justify-content: flex-end;
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .solicitante-nav {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+        position: static;
+        top: auto;
+        background: transparent;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .solicitante-nav a { justify-content: flex-start; text-align: left; }
+    .solicitante-main { flex: 1; max-width: none; padding: 24px 24px 40px; }
+}

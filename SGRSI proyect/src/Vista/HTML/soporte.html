@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- Página del soporte técnico: herramientas para gestionar tickets y movimientos de inventario -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="theme-stylesheet" rel="stylesheet" href="../CSS/Modo claro/soporte.css">
+    <title>Soporte Técnico</title>
+</head>
+<body>
+    <!-- Cabecera del portal de soporte con navegación entre secciones de trabajo -->
+    <header class="soporte-header">
+        <div class="brand">
+            <h1>Portal de Soporte Técnico</h1>
+            <p>Gestión de tickets, diagnósticos, inventario y préstamos de equipos.</p>
+        </div>
+        <div class="header-actions">
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">🌙</button>
+            <button type="button" class="nav-toggle" aria-controls="soporte-nav" aria-expanded="false" aria-label="Abrir menú de navegación">☰</button>
+        </div>
+        <!-- Navegación principal del portal de soporte -->
+        <nav id="soporte-nav" class="soporte-nav">
+            <a href="#tickets" class="tab-link active" data-tab="tickets">Tickets</a>
+            <a href="#inventario" class="tab-link" data-tab="inventario">Inventario</a>
+            <a href="#configuracion" class="tab-link" data-tab="configuracion">Configuración</a>
+            <a href="login.html" class="logout-link">Cerrar sesión</a>
+        </nav>
+    </header>
+
+    <!-- Contenido principal para formularios y tablas del equipo de soporte -->
+    <main class="soporte-main">
+        <section id="tickets" class="panel compact-panel tab-panel active" role="tabpanel">
+            <h2>Tickets</h2>
+            <p>Gestione de forma compacta los principales tipos de solicitudes del área de soporte.</p>
+
+            <div class="ticket-types-grid">
+                <article class="ticket-type-card" id="incidencias">
+                    <h3>Incidencias</h3>
+                    <ul>
+                        <li>Problemas técnicos</li>
+                        <li>Errores de software</li>
+                        <li>Fallos de equipos</li>
+                    </ul>
+                </article>
+
+                <article class="ticket-type-card" id="prestamos">
+                    <h3>Préstamos</h3>
+                    <ul>
+                        <li>Préstamo de equipos</li>
+                        <li>Devoluciones</li>
+                        <li>Estado del recurso</li>
+                    </ul>
+                </article>
+
+                <article class="ticket-type-card" id="solicitudes">
+                    <h3>Solicitud de servicio o sala</h3>
+                    <ul>
+                        <li>Solicitud de apoyo</li>
+                        <li>Reserva de sala</li>
+                        <li>Requerimientos especiales</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="inventario" class="panel compact-panel tab-panel" role="tabpanel" hidden>
+            <h2>Inventario tecnológico</h2>
+            <p>Consulte el estado general de los recursos disponibles.</p>
+
+            <div class="inventario-table-wrapper">
+                <table class="inventario-table">
+                    <thead>
+                        <tr>
+                            <th>ID Equipo</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Ubicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>E-001</td>
+                            <td>Portátil</td>
+                            <td>Funcional</td>
+                            <td>Laboratorio 1</td>
+                        </tr>
+                        <tr>
+                            <td>E-014</td>
+                            <td>Proyector</td>
+                            <td>Requiere mantenimiento</td>
+                            <td>Coord. Soporte</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="configuracion" class="panel compact-panel tab-panel" role="tabpanel" hidden>
+            <h2>Configuración</h2>
+            <p>Opciones rápidas para ajustar el flujo de trabajo del soporte.</p>
+
+            <form action="soporte.html" method="post" class="soporte-form compact-form">
+                <div class="soporte-field soporte-field-compact">
+                    <label for="estado-por-defecto">Estado por defecto</label>
+                    <select id="estado-por-defecto" name="estado_por_defecto">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En proceso</option>
+                        <option value="resuelto">Resuelto</option>
+                    </select>
+                </div>
+
+                <div class="soporte-field soporte-field-compact">
+                    <label for="prioridad-automatica">Prioridad automática</label>
+                    <select id="prioridad-automatica" name="prioridad_automatica">
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                </div>
+
+                <div class="soporte-actions">
+                    <button type="submit" name="guardar_configuracion">Guardar configuración</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.getElementById('soporte-nav');
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                nav.classList.toggle('open', !expanded);
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+                navToggle.setAttribute('aria-label', expanded ? 'Abrir menú de navegación' : 'Cerrar menú de navegación');
+            });
+        }
+
+        tabLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-tab');
+
+                tabLinks.forEach((item) => {
+                    item.classList.toggle('active', item === link);
+                });
+
+                tabPanels.forEach((panel) => {
+                    const isActive = panel.id === target;
+                    panel.classList.toggle('active', isActive);
+                    panel.hidden = !isActive;
+                });
+
+                if (window.matchMedia('(max-width: 767px)').matches) {
+                    nav.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+                }
+            });
+        });
+    </script>
+    <script src="../JS/theme-toggle.js" defer></script>
+</body>
+</html>
